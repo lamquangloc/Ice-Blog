@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 };
 
 import Header from "@/app/_components/header";
+import ScrollToTop from "@/app/_components/scroll-to-top";
 
 export default function RootLayout({
   children,
@@ -66,6 +67,7 @@ export default function RootLayout({
         <ThemeSwitcher />
         <Header />
         <div className="min-h-screen">{children}</div>
+        <ScrollToTop />
         <Footer />
       </body>
     </html>
