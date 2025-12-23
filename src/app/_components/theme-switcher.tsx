@@ -1,23 +1,18 @@
 "use client";
 
-import styles from "./switch.module.css";
 import { memo, useEffect, useState } from "react";
 
 declare global {
   var updateDOM: () => void;
 }
 
-type ColorSchemePreference = "system" | "dark" | "light";
+type ColorSchemePreference = "dark" | "light";
 
 const STORAGE_KEY = "nextjs-blog-starter-theme";
-const modes: ColorSchemePreference[] = ["system", "dark", "light"];
-
-/** to reuse updateDOM function defined inside injected script */
 
 /** function to be injected in script tag for avoiding FOUC (Flash of Unstyled Content) */
 export const NoFOUCScript = (storageKey: string) => {
-  /* can not use outside constants or function as this script will be injected in a different context */
-  const [SYSTEM, DARK, LIGHT] = ["system", "dark", "light"];
+  const [DARK, LIGHT] = ["dark", "light"];
 
   /** Modify transition globally to avoid patched transitions */
   const modifyTransition = () => {
@@ -33,22 +28,18 @@ export const NoFOUCScript = (storageKey: string) => {
     };
   };
 
-  const media = matchMedia(`(prefers-color-scheme: ${DARK})`);
-
   /** function to add remove dark class */
   window.updateDOM = () => {
     const restoreTransitions = modifyTransition();
-    const mode = localStorage.getItem(storageKey) ?? SYSTEM;
-    const systemMode = media.matches ? DARK : LIGHT;
-    const resolvedMode = mode === SYSTEM ? systemMode : mode;
+    // Default to DARK if not found
+    const mode = localStorage.getItem(storageKey) ?? DARK;
     const classList = document.documentElement.classList;
-    if (resolvedMode === DARK) classList.add(DARK);
+    if (mode === DARK) classList.add(DARK);
     else classList.remove(DARK);
     document.documentElement.setAttribute("data-mode", mode);
     restoreTransitions();
   };
   window.updateDOM();
-  media.addEventListener("change", window.updateDOM);
 };
 
 let updateDOM: () => void;
@@ -61,12 +52,14 @@ const Switch = () => {
     () =>
       ((typeof localStorage !== "undefined" &&
         localStorage.getItem(STORAGE_KEY)) ??
-        "system") as ColorSchemePreference,
+        "dark") as ColorSchemePreference,
   );
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     // store global functions to local variables to avoid any interference
     updateDOM = window.updateDOM;
+    setMounted(true);
     /** Sync the tabs */
     addEventListener("storage", (e: StorageEvent): void => {
       e.key === STORAGE_KEY && setMode(e.newValue as ColorSchemePreference);
@@ -80,15 +73,54 @@ const Switch = () => {
 
   /** toggle mode */
   const handleModeSwitch = () => {
-    const index = modes.indexOf(mode);
-    setMode(modes[(index + 1) % modes.length]);
+    setMode((current) => (current === "dark" ? "light" : "dark"));
   };
+
+  if (!mounted) {
+    return null; // Avoid hydration mismatch by not rendering on the server
+  }
+
   return (
     <button
       suppressHydrationWarning
-      className={styles.switch}
       onClick={handleModeSwitch}
-    />
+      className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-neutral-800 shadow-xl border border-gray-200 dark:border-neutral-700 transition-all hover:scale-105 active:scale-95 flex items-center justify-center cursor-pointer"
+      title="Toggle Theme"
+    >
+      {mode === "dark" ? (
+        // Moon Icon for Dark Mode
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6 text-slate-200"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
+          />
+        </svg>
+      ) : (
+        // Sun Icon for Light Mode
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6 text-yellow-500"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+          />
+        </svg>
+      )}
+    </button>
   );
 };
 

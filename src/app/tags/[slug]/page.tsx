@@ -1,0 +1,52 @@
+import Container from "@/app/_components/container";
+import { PostPreview } from "@/app/_components/post-preview";
+import { getAllTags, getPostsByTag } from "@/lib/api";
+
+type Params = {
+    params: Promise<{
+        slug: string;
+    }>;
+};
+
+export default async function Tag({ params }: Params) {
+    const { slug } = await params;
+    const posts = getPostsByTag(slug);
+
+    return (
+        <main>
+            <Container>
+                <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
+                    <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
+                        #{slug}
+                    </h1>
+                </section>
+
+                {posts.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32 mb-32">
+                        {posts.map((post) => (
+                            <PostPreview
+                                key={post.slug}
+                                title={post.title}
+                                coverImage={post.coverImage}
+                                date={post.date}
+                                author={post.author}
+                                slug={post.slug}
+                                excerpt={post.excerpt}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-lg mb-32">No posts found with this tag.</p>
+                )}
+            </Container>
+        </main>
+    );
+}
+
+export async function generateStaticParams() {
+    const tags = getAllTags();
+
+    return tags.map((tag) => ({
+        slug: tag.name.toLowerCase(),
+    }));
+}

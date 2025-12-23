@@ -11,22 +11,37 @@ type Props = {
   author: Author;
 };
 
-export function PostHeader({ title, coverImage, date, author }: Props) {
+export function PostHeader({
+  title,
+  coverImage,
+  date,
+  author,
+}: Props) {
   return (
     <>
       <PostTitle>{title}</PostTitle>
-      <div className="hidden md:block md:mb-12">
+
+      {/* Desktop Author & Date */}
+      <div className="hidden md:flex md:items-center md:gap-4 md:mb-12">
         <Avatar name={author.name} picture={author.picture} />
+        <span className="text-slate-300 dark:text-slate-700">|</span>
+        <div className="text-lg text-slate-500">
+          <DateFormatter dateString={date} />
+        </div>
       </div>
-      <div className="mb-8 md:mb-16 sm:mx-0">
+
+      <div className="max-w-2xl mx-auto mb-8 md:mb-16">
         <CoverImage title={title} src={coverImage} />
       </div>
+
       <div className="max-w-2xl mx-auto">
-        <div className="block md:hidden mb-6">
+        {/* Mobile Author & Date */}
+        <div className="flex md:hidden items-center gap-4 mb-6">
           <Avatar name={author.name} picture={author.picture} />
-        </div>
-        <div className="mb-6 text-lg">
-          <DateFormatter dateString={date} />
+          <span className="text-slate-300 dark:text-slate-700">|</span>
+          <div className="text-lg text-slate-500">
+            <DateFormatter dateString={date} />
+          </div>
         </div>
       </div>
     </>

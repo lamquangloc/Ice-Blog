@@ -1,30 +1,13 @@
-import Container from "@/app/_components/container";
-import { HeroPost } from "@/app/_components/hero-post";
-import { Intro } from "@/app/_components/intro";
-import { MoreStories } from "@/app/_components/more-stories";
 import { getAllPosts } from "@/lib/api";
+import HomeClient from "./home-client";
+import { Post } from "@/interfaces/post";
 
 export default function Index() {
   const allPosts = getAllPosts();
 
-  const heroPost = allPosts[0];
+  // We pass allPosts to the client component. 
+  // Note: content might be large, but for now passing it is fine. 
+  // Optimization: could strip content if not needed for read time calculation.
 
-  const morePosts = allPosts.slice(1);
-
-  return (
-    <main>
-      <Container>
-        <Intro />
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-      </Container>
-    </main>
-  );
+  return <HomeClient allPosts={allPosts} />;
 }

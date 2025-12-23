@@ -6,6 +6,7 @@ import cn from "classnames";
 import { ThemeSwitcher } from "./_components/theme-switcher";
 
 import "./globals.css";
+import "highlight.js/styles/atom-one-dark.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +18,15 @@ export const metadata: Metadata = {
   },
 };
 
+import Header from "@/app/_components/header";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="apple-touch-icon"
@@ -58,9 +61,10 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
       <body
-        className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
+        className={cn(inter.className, "dark:bg-black dark:text-slate-400")}
       >
         <ThemeSwitcher />
+        <Header />
         <div className="min-h-screen">{children}</div>
         <Footer />
       </body>

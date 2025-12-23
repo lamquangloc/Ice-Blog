@@ -11,5 +11,7 @@ export type Post = {
     url: string;
   };
   content: string;
+  categories?: string[];
+  tags?: string[];
   preview?: boolean;
 };

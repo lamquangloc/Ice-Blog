@@ -2,6 +2,22 @@
   @apply text-lg leading-relaxed;
 }
 
+:global(.dark) .markdown {
+  color: #ffffff;
+}
+
+:global(.dark) .markdown h1,
+:global(.dark) .markdown h2,
+:global(.dark) .markdown h3,
+:global(.dark) .markdown h4,
+:global(.dark) .markdown h5,
+:global(.dark) .markdown h6,
+:global(.dark) .markdown p,
+:global(.dark) .markdown li,
+:global(.dark) .markdown strong {
+  color: #ffffff;
+}
+
 .markdown p,
 .markdown ul,
 .markdown ol,
@@ -10,9 +26,155 @@
 }
 
 .markdown h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
+  @apply text-3xl mt-12 mb-4 leading-snug font-bold scroll-mt-24;
 }
 
 .markdown h3 {
-  @apply text-2xl mt-8 mb-4 leading-snug;
+  @apply text-2xl mt-8 mb-4 leading-snug font-bold scroll-mt-24;
+}
+
+.markdown a {
+  @apply text-blue-600 hover:underline underline-offset-2 decoration-blue-600;
+}
+
+/* Table of Contents Styling */
+/* Table of Contents Styling */
+.markdown :global(.toc-box) {
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+:global(.dark) .markdown :global(.toc-box) {
+  background-color: #171717;
+  /* Neutral 900 */
+  border-color: #334155;
+  /* Slate 700 */
+}
+
+.markdown :global(.toc-box) ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.markdown :global(.toc-box) ul li {
+  margin: 0.25rem 0;
+}
+
+.markdown :global(.toc-box) ul ul {
+  margin-top: 0.125rem;
+  margin-bottom: 0.125rem;
+  padding-left: 1.5rem;
+}
+
+.markdown :global(.toc-box) a {
+  @apply text-blue-600 no-underline hover:underline;
+  font-weight: 500;
+  display: inline-block;
+}
+
+:global(.dark) .markdown :global(.toc-box) a {
+  @apply text-blue-400;
+}
+
+/* Code Blocks Styling - ALWAYS DARK */
+.markdown pre {
+  background-color: #0f172a !important;
+  /* Slate-900 like */
+  color: #e2e8f0 !important;
+  /* Slate-200 */
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  border: 1px solid #334155;
+  margin: 1.5rem 0;
+}
+
+.markdown code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875em;
+}
+
+/* Inline code styling */
+.markdown p code,
+.markdown li code {
+  @apply bg-neutral-100 px-1.5 py-0.5 rounded text-sm text-pink-500 font-medium;
+}
+
+:global(.dark) .markdown p code,
+:global(.dark) .markdown li code {
+  background-color: #334155;
+  /* Slate 700 - Lighter than black bg */
+  color: #f472b6;
+  /* Pink 400 */
+}
+
+/* Block code reset for inline styles inside pre */
+.markdown pre code {
+  background-color: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: inherit;
+}
+
+/* Table Styling */
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  overflow-x: auto;
+  display: block;
+}
+
+.markdown table {
+  display: table;
+}
+
+.markdown th,
+.markdown td {
+  border: 1px solid #cbd5e1;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  /* Default Light Mode Colors */
+  background-color: transparent;
+  color: #0f172a;
+  /* Slate 900 */
+}
+
+/* Light Mode Header */
+.markdown th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+}
+
+/* Light Mode Zebra Striping */
+.markdown tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+/* Dark Mode Overrides - Using :global(.dark) to target the html class */
+:global(.dark) .markdown th,
+:global(.dark) .markdown td {
+  border-color: #334155;
+  /* Slate 700 */
+  color: #fff;
+  /* White text */
+}
+
+:global(.dark) .markdown th {
+  background-color: #171717;
+  /* Neutral 900 header */
+}
+
+:global(.dark) .markdown tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+  /* Transparent white for zebra stripe */
+}
+
+:global(.dark) .markdown tr:nth-child(odd) {
+  background-color: transparent;
 }
