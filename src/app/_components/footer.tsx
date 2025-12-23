@@ -31,7 +31,7 @@ export function Footer() {
           {/* Social Links */}
           <div className="flex items-center gap-6">
             <a
-              href="https://github.com"
+              href="https://github.com/lamquangloc"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-500 hover:text-black dark:text-slate-400 dark:hover:text-white transition-colors"
@@ -52,30 +52,7 @@ export function Footer() {
               </svg>
             </a>
             <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
-              aria-label="LinkedIn"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                <rect x="2" y="9" width="4" height="12" />
-                <circle cx="4" cy="4" r="2" />
-              </svg>
-            </a>
-            <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/tony.legen.14"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400 transition-colors"
@@ -96,7 +73,7 @@ export function Footer() {
               </svg>
             </a>
             <a
-              href="mailto:contact@iceblog.dev"
+              href="mailto:lamquangloc81@gmail.com"
               className="text-slate-500 hover:text-red-500 dark:text-slate-400 dark:hover:text-red-400 transition-colors"
               aria-label="Email"
             >
