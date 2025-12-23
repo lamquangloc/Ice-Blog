@@ -1,72 +1,89 @@
-# A statically generated blog example using Next.js, Markdown, and TypeScript
+# IceBlog ❄️
 
-This is the existing [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) plus TypeScript.
+Welcome to **IceBlog** – a personal tech blog built with **Next.js 14**, **Tailwind CSS**, and a touch of Cyberpunk aesthetic. This platform serves as a space to share knowledge, tutorials, and insights about modern web development, focusing on **JavaScript**, **Java**, and **Software Engineering**.
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates) feature using Markdown files as the data source.
+![IceBlog Preview](./public/assets/blog/preview/cover.jpg)
+*(Note: Replace with an actual screenshot of your homepage if available)*
 
-The blog posts are stored in `/_posts` as Markdown files with front matter support. Adding a new Markdown file in there will create a new blog post.
+## 🚀 Features
 
-To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) and [`remark-html`](https://github.com/remarkjs/remark-html) to convert the Markdown files into an HTML string, and then send it down as a prop to the page. The metadata of every post is handled by [`gray-matter`](https://github.com/jonschlinkert/gray-matter) and also sent in props to the page.
+- **Modern & Cyberpunk UI/UX**: unique design with detailed animations, glassmorphism, and a distinct "developer workspace" feel.
+- **Dark/Light Mode**: seamless theme switching with adaptive diverse color palettes (Neon Cyberpunk in Dark Mode, Clean Modern in Light Mode).
+- **Markdown-based Content**: write posts in Markdown with full support for syntax highlighting, categories, and tags.
+- **Advanced Search**: fast, client-side search functionality with filtering by Categories and Tags.
+- **Certificates Showcase**: a dedicated page to display professional certifications and achievements.
+- **Responsive Design**: fully optimized for all devices, from mobile phones to large desktop screens.
+- **Performance Optimized**: built on Next.js App Router for blazing fast static site generation (SSG) and dynamic rendering.
 
-## Demo
+## 🛠️ Tech Stack
 
-[https://next-blog-starter.vercel.app/](https://next-blog-starter.vercel.app/)
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/) & `tailwindcss-animate`
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Content**: Markdown / Remark / Rehype
+- **Deployment**: Vercel (recommended)
 
-## Deploy your own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/blog-starter&project-name=blog-starter&repository-name=blog-starter)
-
-### Related examples
-
-- [AgilityCMS](/examples/cms-agilitycms)
-- [Builder.io](/examples/cms-builder-io)
-- [ButterCMS](/examples/cms-buttercms)
-- [Contentful](/examples/cms-contentful)
-- [Cosmic](/examples/cms-cosmic)
-- [DatoCMS](/examples/cms-datocms)
-- [DotCMS](/examples/cms-dotcms)
-- [Drupal](/examples/cms-drupal)
-- [Enterspeed](/examples/cms-enterspeed)
-- [Ghost](/examples/cms-ghost)
-- [GraphCMS](/examples/cms-graphcms)
-- [Kontent.ai](/examples/cms-kontent-ai)
-- [MakeSwift](/examples/cms-makeswift)
-- [Payload](/examples/cms-payload)
-- [Plasmic](/examples/cms-plasmic)
-- [Prepr](/examples/cms-prepr)
-- [Prismic](/examples/cms-prismic)
-- [Sanity](/examples/cms-sanity)
-- [Sitecore XM Cloud](/examples/cms-sitecore-xmcloud)
-- [Sitefinity](/examples/cms-sitefinity)
-- [Storyblok](/examples/cms-storyblok)
-- [TakeShape](/examples/cms-takeshape)
-- [Tina](/examples/cms-tina)
-- [Umbraco](/examples/cms-umbraco)
-- [Umbraco heartcore](/examples/cms-umbraco-heartcore)
-- [Webiny](/examples/cms-webiny)
-- [WordPress](/examples/cms-wordpress)
-- [Blog Starter](/examples/blog-starter)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+## 📂 Project Structure
 
 ```bash
-npx create-next-app --example blog-starter blog-starter-app
+.
+├── _posts/             # Markdown blog posts
+├── public/             # Static assets (images, favicons, certificates)
+├── src/
+│   ├── app/            # App Router pages (Home, About, Certificates, Search, etc.)
+│   ├── components/     # Reusable UI components
+│   ├── lib/            # Utility functions (API, constants, markdown parsers)
+│   └── interfaces/     # TypeScript interfaces
+└── ...
 ```
+
+## ⚡ Getting Started
+
+First, run the development server:
 
 ```bash
-yarn create next-app --example blog-starter blog-starter-app
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-```bash
-pnpm create next-app --example blog-starter blog-starter-app
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 📝 Adding New Posts
+
+1. Create a new `.md` file in the `_posts` directory.
+2. Add the required frontmatter:
+
+```yaml
+---
+title: "Your Post Title"
+excerpt: "A short summary of the post..."
+coverImage: "/assets/blog/cover/your-image.jpg"
+date: "2025-12-23T05:35:07.322Z"
+author:
+  name: "Lâm Quang Lộc"
+  picture: "/assets/blog/authors/avatar.png"
+ogImage:
+  url: "/assets/blog/preview/your-image.jpg"
+categories: ["JavaScript", "React"]
+tags: ["frontend", "web-dev"]
+---
 ```
 
-Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+3. Write your content below the frontmatter using standard Markdown.
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## 👤 Author
 
-# Notes
+**Lâm Quang Lộc**
+- **Role**: Software Engineer
+- **Github**: [@lamquangloc](https://github.com/lamquangloc)
+- **Email**: lamquangloc81@gmail.com
 
-`blog-starter` uses [Tailwind CSS](https://tailwindcss.com) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3).
+---
+
+Designed and built with ❤️ by Lâm Quang Lộc.
