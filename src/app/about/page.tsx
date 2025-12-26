@@ -1,7 +1,7 @@
 import Container from "@/app/_components/container";
 import Image from "next/image";
 import Link from "next/link";
-import { Github, Facebook, Mail, Phone, Code2, Database, Layout, Server, Terminal, Cpu } from "lucide-react";
+import { Github, Facebook, Mail, Phone, Code2, Database, Layout, Server, Terminal, Cpu, Briefcase, ExternalLink } from "lucide-react";
 
 export default function About() {
     return (
@@ -61,9 +61,9 @@ export default function About() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <SkillCard
-                            title="Languages"
+                            title="Languages & Tools"
                             icon={<Code2 className="w-5 h-5 text-blue-500" />}
-                            skills={["Java", "JavaScript", "C/C++"]}
+                            skills={["Java", "JavaScript", "C/C++", "Git", "Figma"]}
                             colorClass="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-500/10 dark:text-blue-300 dark:border-blue-500/30"
                         />
                         <SkillCard
@@ -75,14 +75,48 @@ export default function About() {
                         <SkillCard
                             title="Backend"
                             icon={<Server className="w-5 h-5 text-green-500" />}
-                            skills={["NodeJS"]}
+                            skills={["NodeJS", "ExpressJS"]}
                             colorClass="bg-green-50 text-green-700 border-green-200 dark:bg-green-500/10 dark:text-green-300 dark:border-green-500/30"
                         />
                         <SkillCard
                             title="Database"
                             icon={<Database className="w-5 h-5 text-amber-500" />}
-                            skills={["MongoDB", "SQL"]}
+                            skills={["MongoDB", "PostgreSQL", "SQLite"]}
                             colorClass="bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:border-amber-500/30"
+                        />
+                    </div>
+                </section>
+
+
+
+                {/* Projects */}
+                <section className="max-w-4xl mx-auto mb-20 animate-fade-in-up" style={{ animationDelay: '0.25s' }}>
+                    <h2 className="text-2xl font-bold font-mono text-slate-800 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-4 mb-8 flex items-center gap-2">
+                        <Briefcase className="w-6 h-6 text-purple-500" />
+                        <span>// Projects</span>
+                    </h2>
+
+                    <div className="space-y-8">
+                        <ProjectCard
+                            title="Ice Restaurant"
+                            description="Hệ thống quản lý nhà hàng toàn diện, hỗ trợ đặt bàn, gọi món và thanh toán hóa đơn. Giao diện trực quan giúp tối ưu hóa quy trình vận hành và quản lý doanh thu hiệu quả."
+                            skills={["Java", "SQL Server", "Swing"]}
+                            image="/assets/blog/project/ice-restaurant.png"
+                            repoUrl="https://github.com/lamquangloc/Project_DACS"
+                        />
+                        <ProjectCard
+                            title="Prayer Reading App"
+                            description="Ứng dụng di động giúp người dùng đọc kinh theo ngày, tích hợp tính năng nhắc nhở giờ cầu nguyện tự động và kho lưu trữ kinh phong phú. Hỗ trợ hoạt động offline với cơ sở dữ liệu Hive."
+                            skills={["Flutter", "Dart", "Hive", "Local Notifications"]}
+                            image="/assets/blog/project/prayer-reading.png"
+                            repoUrl="https://github.com/lamquangloc/Prayer_reading_app"
+                        />
+                        <ProjectCard
+                            title="Website đồ án vặt"
+                            description="Website thương mại điện tử chuyên kinh doanh đồ ăn vặt. Tích hợp đầy đủ các tính năng: tìm kiếm sản phẩm, giỏ hàng, đặt hàng online và trang quản trị (Admin) để quản lý đơn hàng."
+                            skills={["PHP", "MySQL", "HTML5/CSS3", "JavaScript"]}
+                            image="/assets/blog/project/doanvat.png"
+                            repoUrl="https://github.com/lamquangloc/Project_LTW"
                         />
                     </div>
                 </section>
@@ -128,7 +162,7 @@ export default function About() {
                 </section>
 
             </Container>
-        </main>
+        </main >
     );
 }
 
@@ -162,5 +196,54 @@ function ContactItem({ icon, label, href, hoverColor }: { icon: React.ReactNode,
             <span className="font-mono text-sm truncate">{label}</span>
             <span className="ml-auto opacity-0 group-hover:opacity-100">&rarr;</span>
         </a>
+    );
+}
+
+function ProjectCard({ title, description, skills, image, repoUrl }: { title: string, description: string, skills: string[], image: string, repoUrl: string }) {
+    return (
+        <div className="group flex flex-col md:flex-row gap-6 bg-white dark:bg-[#0a0e27]/40 p-6 rounded-2xl border border-slate-200 dark:border-cyan-500/20 hover:border-blue-400 dark:hover:border-cyan-400/50 transition-all shadow-sm hover:shadow-lg">
+            {/* Image Section */}
+            <div className="w-full md:w-2/5 shrink-0 overflow-hidden rounded-xl border border-slate-100 dark:border-white/5 relative aspect-video">
+                <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+            </div>
+
+            {/* Content Section */}
+            <div className="flex flex-col flex-1">
+                <div className="mb-3">
+                    <h3 className="text-xl font-bold font-mono text-slate-900 dark:text-cyan-300 group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-colors">
+                        {title}
+                    </h3>
+                </div>
+
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4 flex-1 font-mono">
+                    {description}
+                </p>
+
+                <div className="space-y-4 mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                        {skills.map(skill => (
+                            <span key={skill} className="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 font-mono border border-slate-200 dark:border-white/5">
+                                {skill}
+                            </span>
+                        ))}
+                    </div>
+
+                    <a
+                        href={repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-cyan-400 hover:underline"
+                    >
+                        <Github className="w-4 h-4" />
+                        View Repository <ExternalLink className="w-3 h-3" />
+                    </a>
+                </div>
+            </div>
+        </div>
     );
 }
